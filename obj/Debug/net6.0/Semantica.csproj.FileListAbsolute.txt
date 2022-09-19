@@ -1,0 +1,15 @@
+D:\COSAS IMPORTANTES\↱ UNI ↲\SEMESTRE 5\Automatas 2\Semantica\bin\Debug\net6.0\Semantica.exe
+D:\COSAS IMPORTANTES\↱ UNI ↲\SEMESTRE 5\Automatas 2\Semantica\bin\Debug\net6.0\Semantica.deps.json
+D:\COSAS IMPORTANTES\↱ UNI ↲\SEMESTRE 5\Automatas 2\Semantica\bin\Debug\net6.0\Semantica.runtimeconfig.json
+D:\COSAS IMPORTANTES\↱ UNI ↲\SEMESTRE 5\Automatas 2\Semantica\bin\Debug\net6.0\Semantica.dll
+D:\COSAS IMPORTANTES\↱ UNI ↲\SEMESTRE 5\Automatas 2\Semantica\bin\Debug\net6.0\Semantica.pdb
+D:\COSAS IMPORTANTES\↱ UNI ↲\SEMESTRE 5\Automatas 2\Semantica\obj\Debug\net6.0\Semantica.csproj.AssemblyReference.cache
+D:\COSAS IMPORTANTES\↱ UNI ↲\SEMESTRE 5\Automatas 2\Semantica\obj\Debug\net6.0\Semantica.GeneratedMSBuildEditorConfig.editorconfig
+D:\COSAS IMPORTANTES\↱ UNI ↲\SEMESTRE 5\Automatas 2\Semantica\obj\Debug\net6.0\Semantica.AssemblyInfoInputs.cache
+D:\COSAS IMPORTANTES\↱ UNI ↲\SEMESTRE 5\Automatas 2\Semantica\obj\Debug\net6.0\Semantica.AssemblyInfo.cs
+D:\COSAS IMPORTANTES\↱ UNI ↲\SEMESTRE 5\Automatas 2\Semantica\obj\Debug\net6.0\Semantica.csproj.CoreCompileInputs.cache
+D:\COSAS IMPORTANTES\↱ UNI ↲\SEMESTRE 5\Automatas 2\Semantica\obj\Debug\net6.0\Semantica.dll
+D:\COSAS IMPORTANTES\↱ UNI ↲\SEMESTRE 5\Automatas 2\Semantica\obj\Debug\net6.0\refint\Semantica.dll
+D:\COSAS IMPORTANTES\↱ UNI ↲\SEMESTRE 5\Automatas 2\Semantica\obj\Debug\net6.0\Semantica.pdb
+D:\COSAS IMPORTANTES\↱ UNI ↲\SEMESTRE 5\Automatas 2\Semantica\obj\Debug\net6.0\Semantica.genruntimeconfig.cache
+D:\COSAS IMPORTANTES\↱ UNI ↲\SEMESTRE 5\Automatas 2\Semantica\obj\Debug\net6.0\ref\Semantica.dll

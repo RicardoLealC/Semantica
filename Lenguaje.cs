@@ -61,6 +61,17 @@ namespace Semantica
             }
             return 0;
         }
+        private Variable.TipoDato getTipo(string nombreVariable)
+        {
+            foreach (Variable v in variables)
+            {
+                if (v.getNombre() == nombreVariable)
+                {
+                    return v.getTipoDato();
+                }
+            }
+            return Variable.TipoDato.Char;
+        }
         private bool existeVariable(string nombre){
             foreach (Variable v in variables)
             {
@@ -200,7 +211,23 @@ namespace Semantica
                 Asignacion();
             }
         }
-
+        private Variable.TipoDato evaluaNumero(float resultado)
+        {
+            if(resultado <= 255)
+            {
+                return Variable.TipoDato.Char;
+            }
+            else if(resultado <= 65535)
+            {
+                return Variable.TipoDato.Int;
+            }
+            return Variable.TipoDato.Float;
+        }
+        private bool evaluaSemantica(string variable , float resultado)
+        {
+            Variable.TipoDato tipoDato = getTipo(variable); 
+            return false;
+        }
         //Asignacion -> identificador = cadena | Expresion;
         private void Asignacion()
         {   

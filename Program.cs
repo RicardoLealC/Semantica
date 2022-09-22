@@ -9,12 +9,12 @@ namespace Semantica
         {
             try
             {
-                Byte x = (Byte)256;
-                Console.WriteLine(x);
-                x++;
-                x++;
-                Console.WriteLine(x);
-                Lenguaje a = new Lenguaje();
+                //*Byte x = (Byte)256;
+                //Console.WriteLine(x);
+                //x++;
+                //x++;
+                //onsole.WriteLine(x);
+                Lenguaje a = new Lenguaje();//
 
                 a.Programa();
 

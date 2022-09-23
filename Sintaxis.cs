@@ -1,3 +1,4 @@
+//Leal Cabrera Ricardo
 using System;
 
 namespace Semantica

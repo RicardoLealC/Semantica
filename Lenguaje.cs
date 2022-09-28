@@ -10,7 +10,9 @@ using System;
 //                  Funcion: private float convert(float valor, string TipoDato)
 //                  deberan usar el residuo de la division %255, %65535
 
-//
+//Requerimiento 4.- Evaluar nuevamente la condicion del if - else, while, for, do-while con respecto al parametro que recibe
+
+//Requerimiento 5.- Levantar una excepcion en el Scanf cuando la captura no sea un numero
 
 namespace Semantica
 {
@@ -635,6 +637,7 @@ namespace Semantica
                     //Ej: si el casteo es char y el pop regresa un 256...
                     //... el valor equivalente en casteo es un 0
                 }
+
             }
         }
     }

@@ -14,6 +14,8 @@ using System;
 
 //Requerimiento 5.- Levantar una excepcion en el Scanf cuando la captura no sea un numero
 
+//Requerimiento 6.- Ejecutar el for()
+
 namespace Semantica
 {
     public class Lenguaje : Sintaxis
@@ -322,18 +324,28 @@ namespace Semantica
             match("for");
             match("(");
             Asignacion(evaluacion);
-            Condicion();
-            match(";");
-            Incremento(evaluacion);
-            match(")");
-            if (getContenido() == "{")
-            {
-                BloqueInstrucciones(evaluacion);  
-            }
-            else
-            {
-                Instruccion(evaluacion);
-            }
+            //Requerimiento 4
+            //Requerimiento 6:
+            //                a) Guardar la posicion del archivo de texto en una variable entera
+            
+            bool validarFor = Condicion();
+            //                b) Agregar un ciclo 'while' despues de validar el for
+            // while()
+            //{    
+                match(";");
+                Incremento(evaluacion);
+                match(")");
+                if (getContenido() == "{")
+                {
+                    BloqueInstrucciones(evaluacion);  
+                }
+                else
+                {
+                    Instruccion(evaluacion);
+                }
+                // c) Regresara la posicion de lectura del archivo
+                // d) Sacar otro token    
+            //}    
         }
 
         //Incremento -> Identificador ++ | --

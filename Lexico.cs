@@ -7,6 +7,7 @@ namespace Semantica
     {
         StreamReader archivo;
         protected StreamWriter log;
+        protected int GuardarPosicion = 0;
         const int F = -1;
         const int E = -2;
         protected int linea;
@@ -282,6 +283,7 @@ namespace Semantica
                 if (estado >= 0)
                 {
                     archivo.Read();
+                    GuardarPosicion ++;
                     if (c == '\n')
                     {
                         linea ++;

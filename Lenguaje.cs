@@ -244,6 +244,19 @@ namespace Semantica
             Variable.TipoDato tipoDato = getTipo(variable); 
             return false;
         }
+        //convierteValor 
+        private float convierteValor(float valor, Variable.TipoDato tipoDato)
+        {
+            if(tipoDato == Variable.TipoDato.Char)
+            {
+                return (char)valor % 256;
+            }
+            else if(tipoDato == Variable.TipoDato.Int)
+            {
+                return (int)valor % 65536;
+            }
+            return valor;
+        }
         //Asignacion -> identificador = cadena | Expresion;
         private void Asignacion(bool evaluacion)
         {   
@@ -596,7 +609,6 @@ namespace Semantica
         {
             if (getClasificacion() == Tipos.Numero)
             {
-                log.Write(getContenido() + " " );
                 if(dominante < evaluaNumero(float.Parse(getContenido())))
                 {
                     dominante = evaluaNumero(float.Parse(getContenido()));
@@ -606,13 +618,15 @@ namespace Semantica
             }
             else if (getClasificacion() == Tipos.Identificador)
             {
+                stack.Push(getValor(getContenido()));
                 if(!existeVariable(getContenido()))
                 {
                     throw new Error("Error: Variable inexistente '" + getContenido() + "' Encontrada en Linea: " + linea, log);
                 }
-                log.Write(getContenido() + " " );
-                //Requerimiento 1
-                stack.Push(getValor(getContenido()));
+                if (dominante < getTipo(getContenido()))
+                {
+                    dominante = getTipo(getContenido());
+                }
                 match(Tipos.Identificador);
             }
             else
@@ -643,7 +657,9 @@ namespace Semantica
                 match(")");
                 if (huboCasteo)
                 {
-                    //Requerimiento 2
+                    dominante = casteo;
+                    float valor = stack.Pop();
+                    stack.Push(convierteValor(valor , casteo));                   //Requerimiento 2
                     //Saco un elemento del stack
                     //Convierto ese valor al equivalente en casteo
                     //Ej: si el casteo es char y el pop regresa un 256...

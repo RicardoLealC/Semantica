@@ -42,6 +42,11 @@ namespace Semantica
                 log.WriteLine(v.getNombre() + " : " + v.getTipoDato() + "\n");    
             }
         }
+        public void SetPosicion(long posicion)
+        {
+            archivo.DiscardBufferedData();
+            archivo.BaseStream.Seek(posicion, SeekOrigin.Begin);
+        }
         //Programa  -> Librerias? Variables? Main
         public void Programa()
         {
@@ -301,33 +306,43 @@ namespace Semantica
         {
             match("while");
             match("(");
-            Condicion();
-            match(")");
-             if (getContenido() == "{") 
+            bool validaWhile = Condicion();
+            if (!evaluacion)
             {
-                BloqueInstrucciones(evaluacion);
+                validaWhile = evaluacion;
+            }
+            match(")");
+            if (getContenido() == "{") 
+            {
+                BloqueInstrucciones(validaWhile);
             }
             else
             {
-                Instruccion(evaluacion);
+                Instruccion(validaWhile);
             }
         }
 
         //Do -> do bloque de instrucciones | intruccion while(Condicion)
         private void Do(bool evaluacion)
         {
+            bool validaDo = evaluacion;
             match("do");
             if (getContenido() == "{")
             {
-                BloqueInstrucciones(evaluacion);
+                BloqueInstrucciones(validaDo);
             }
             else
             {
-                Instruccion(evaluacion);
+                Instruccion(validaDo);
             } 
             match("while");
             match("(");
             Condicion();
+            validaDo = Condicion();
+            if (!evaluacion)
+            {
+                validaDo = evaluacion;
+            }
             match(")");
             match(";");
         }
@@ -340,22 +355,40 @@ namespace Semantica
             //Requerimiento 4
             //Requerimiento 6:
             //                a) Guardar la posicion del archivo de texto en una variable entera
-            
-            bool validarFor = Condicion();
-            //                b) Agregar un ciclo 'while' despues de validar el for
-            // while()
-            //{    
-                match(";");
-                Incremento(evaluacion);
-                match(")");
-                if (getContenido() == "{")
+            string variable = getContenido();
+            bool validaFor;
+            int posicionFor = posicion;
+            int lineaFor = linea;
+            do
+            {
+                validaFor = Condicion();
+                if (!evaluacion)
                 {
-                    BloqueInstrucciones(evaluacion);  
+                    validaFor = false;
+                }
+                match(";");
+                Incremento(validaFor);
+                match(")");
+                if(getContenido() == "{")
+                {
+                    BloqueInstrucciones(validaFor);
                 }
                 else
                 {
-                    Instruccion(evaluacion);
+                    Instruccion(validaFor);
                 }
+                if  (validaFor)
+                {
+                    posicion = posicionFor - variable.Length;
+                    linea = lineaFor;
+                    SetPosicion(posicion);
+                    NextToken();
+                }
+            }
+            //                b) Agregar un ciclo 'while' despues de validar el for
+            // while()
+            //{    
+                while(validaFor);
                 // c) Regresara la posicion de lectura del archivo
                 // d) Sacar otro token    
             //}    
@@ -466,6 +499,10 @@ namespace Semantica
             match("if");
             match("(");
             bool validarIf = Condicion();
+            if (!evaluacion)
+            {
+                validarIf = evaluacion;
+            }
             match(")");
             if (getContenido() == "{")
             {
@@ -480,11 +517,26 @@ namespace Semantica
                 match("else");
                 if (getContenido() == "{")
                 {
+                    if (evaluacion)
+                    {
+                        BloqueInstrucciones(!validarIf);  
+                    }
+                    else
+                    {
+                        BloqueInstrucciones(evaluacion);  
+                    }
                     BloqueInstrucciones(validarIf);
                 }
                 else
                 {
-                    Instruccion(evaluacion);
+                    if (evaluacion)
+                    {
+                        Instruccion(!validarIf); 
+                    }
+                    else
+                    {
+                        Instruccion(evaluacion);    
+                    }
                 }
             }
         }
@@ -530,9 +582,21 @@ namespace Semantica
             {
                 throw new Error("Error: Variable inexistente '" + getContenido() + "' Encontrada en Linea: " + linea, log);
             }
-            string val = ""+Console.ReadLine();
+            if(evaluacion)
+            {
+                string val = "" + Console.ReadLine();
+                float n;
+                if (float.TryParse(val, out n))
+                {
+                     modVariable(getContenido(), n);
+                }
+                else
+                {
+                     throw new Error("Error: A una variable Numerica no se le puede asignar un valor no numerico en la linea: " + linea, log);
+                }
+            }
+            
             //Requerimiento 5.- Modificar el valor de la variable
-            modVariable(getContenido(), float.Parse(val));
             match(Tipos.Identificador);
             match(")");
             match(";");

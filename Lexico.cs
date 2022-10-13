@@ -5,7 +5,7 @@ namespace Semantica
 {
     public class Lexico : Token
     {
-        StreamReader archivo;
+        protected StreamReader archivo;
         protected StreamWriter log;
         protected int GuardarPosicion = 0;
         const int F = -1;

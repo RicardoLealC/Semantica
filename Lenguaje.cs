@@ -357,7 +357,7 @@ namespace Semantica
             //                a) Guardar la posicion del archivo de texto en una variable entera
             string variable = getContenido();
             bool validaFor;
-            int posicionFor = posicion;
+            int posicionFor = GuardarPosicion;
             int lineaFor = linea;
             do
             {
@@ -379,9 +379,9 @@ namespace Semantica
                 }
                 if  (validaFor)
                 {
-                    posicion = posicionFor - variable.Length;
+                    GuardarPosicion = posicionFor - variable.Length;
                     linea = lineaFor;
-                    SetPosicion(posicion);
+                    SetPosicion(GuardarPosicion);
                     NextToken();
                 }
             }
@@ -525,7 +525,6 @@ namespace Semantica
                     {
                         BloqueInstrucciones(evaluacion);  
                     }
-                    BloqueInstrucciones(validarIf);
                 }
                 else
                 {
@@ -563,7 +562,7 @@ namespace Semantica
             {
                 Expresion();
                 float resultado = stack.Pop();
-                Console.Write(stack.Pop());
+                Console.Write(resultado);
             }
             match(")");
             match(";");

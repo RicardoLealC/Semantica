@@ -1,17 +1,24 @@
 Primer constructor
 Archivo: prueba.cpp
-28/09/2022 09:10:06 a. m.
-3 5 + 10 area : Float
+13/10/2022 07:09:21 a. m.
 
-radio : Float
+= =  = 5
 
-pi : Float
+= =  = 0
+- - 
+= =  = 0
+- - - 
+= =  = 0
+- - - - 
+= =  = 0
+- - - - - 
+= =  = 0
+- - - - - - 
+= =  = 0
+- 
+= =  = 256
 
-resultado : Float
+= =  = 0
 
-a : Int
-
-d : Int
-
-x : Char
-
+= =  = 256
+Error de semantica: no podemos asignar un: <Int> a un <Char> en linea  45

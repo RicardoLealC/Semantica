@@ -1,20 +1,16 @@
 //Leal Cabrera Ricardo
 using System;
 
-//Requerimiento 1.- Actualizar 'dominante' para variables en la expresion
-//                  Ejemplo: float x; char y; y=x; / ERROR
+//Requerimiento 1.- Actualizacion
+//                  a) Agregar el residuo de la division en el porfactor
+//                  b) Agregar en instruccion los incrementos de terminos de factor
+//                      a++, a--, a+=1, a-=1, a*=1, a/=1, a%=1
+//                      en donde el 1 puede ser una expresion.
+//                  c) Marcar errores semanticos cuando los incrementos de termino
+//                     o incrementos de factor superen el rango de la variable
+//                  d) Considerar el incisco b y c para el for
+//                  e) Hacer funcionar el do() y while()
 
-//Requerimiento 2.- Actualizar 'dominante' para el casteo y el valor de la subexpresion
-
-//Requerimiento 3.- Programar un metodo de conversion de un valor a un tipo de dato
-//                  Funcion: private float convert(float valor, string TipoDato)
-//                  deberan usar el residuo de la division %255, %65535
-
-//Requerimiento 4.- Evaluar nuevamente la condicion del if - else, while, for, do-while con respecto al parametro que recibe
-
-//Requerimiento 5.- Levantar una excepcion en el Scanf cuando la captura no sea un numero
-
-//Requerimiento 6.- Ejecutar el for()
 
 namespace Semantica
 {
@@ -265,17 +261,24 @@ namespace Semantica
         //Asignacion -> identificador = cadena | Expresion;
         private void Asignacion(bool evaluacion)
         {   
-            //Requerimiento 2 sino existe la variable levantar excepcion
             string nombre = getContenido();
             if(!existeVariable(getContenido()))
             {
                 throw new Error("Error: Variable inexistente '" + getContenido() + "' Encontrada en Linea: " + linea, log);
             }
             match(Tipos.Identificador); 
+            dominante = Variable.TipoDato.Char;
+            if (getClasificacion() == Tipos.IncrementoFactor || getClasificacion() == Tipos.IncrementoTermino )
+            {
+                //requerimiento 1 b)
+                //requerimiento 1 c)
+            }
+            else
+            
             log.WriteLine();
             log.Write(getContenido() + " = ");
             match(Tipos.Asignacion);
-            dominante = Variable.TipoDato.Char;
+
             Expresion();
             match(";");
             float resultado = stack.Pop();
@@ -352,9 +355,6 @@ namespace Semantica
             match("for");
             match("(");
             Asignacion(evaluacion);
-            //Requerimiento 4
-            //Requerimiento 6:
-            //                a) Guardar la posicion del archivo de texto en una variable entera
             string variable = getContenido();
             bool validaFor;
             int posicionFor = GuardarPosicion;
@@ -384,14 +384,9 @@ namespace Semantica
                     SetPosicion(GuardarPosicion);
                     NextToken();
                 }
-            }
-            //                b) Agregar un ciclo 'while' despues de validar el for
-            // while()
-            //{    
+            }  
                 while(validaFor);
-                // c) Regresara la posicion de lectura del archivo
-                // d) Sacar otro token    
-            //}    
+  
         }
 
         //Incremento -> Identificador ++ | --
@@ -656,6 +651,7 @@ namespace Semantica
                 log.Write(operador + " ");
                 float n1 = stack.Pop();
                 float n2 = stack.Pop();
+                //Requerimiento 1 a)
                 switch(operador)
                 {
                     case "*":

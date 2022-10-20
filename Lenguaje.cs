@@ -6,10 +6,14 @@ using System;
 //                  b) Agregar en instruccion los incrementos de terminos de factor
 //                      a++, a--, a+=1, a-=1, a*=1, a/=1, a%=1
 //                      en donde el 1 puede ser una expresion.
-//                  c) Marcar errores semanticos cuando los incrementos de termino
+//                  c) Programar el destructor de la clase lexico 
+//                      para ejecutar el metodo cerrarArchivo()
+//Requerimiento 2.- Actualizacion  
+//                  a) Marcar errores semanticos cuando los incrementos de termino
 //                     o incrementos de factor superen el rango de la variable
-//                  d) Considerar el incisco b y c para el for
-//                  e) Hacer funcionar el do() y while()
+//                  b) Considerar el incisco b y c para el for
+//                  c) Hacer funcionar el do() y while()
+//Requerimiento 3.-
 
 
 namespace Semantica
@@ -27,6 +31,13 @@ namespace Semantica
         {
 
         }
+
+        ~Lenguaje()
+        {
+            Console.WriteLine("Destructor");
+            cerrar();
+        }
+
         private void addVariable(string nombre, Variable.TipoDato tipo)
         {
             variables.Add(new Variable(nombre, tipo));

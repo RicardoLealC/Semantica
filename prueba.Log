@@ -1,6 +1,30 @@
 Primer constructor
 Archivo: prueba.cpp
-20/10/2022 09:33:21 a. m.
+21/10/2022 09:57:18 a. m.
+area : Float
+
+radio : Float
+
+pi : Float
+
+resultado : Float
+
+a : Int
+
+d : Int
+
+altura : Int
+
+x : Float
+
+y : Char
+
+i : Int
+
+j : Int
+
+
+= = + * - / -  = 61
 area : Float
 
 radio : Float

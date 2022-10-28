@@ -14,9 +14,16 @@ using System;
 //                  b) Considerar el incisco b y c para el for
 //                  c) Hacer funcionar el do() y while()
 //Requerimiento 3.-
-//                  a) Considerar las variables y los casteos de las expresiones matematicas
+//                  a) Considerar las variables y los casteos de las expresiones matematicas en ensamblador
 //                  b) Considerar el residuo de la division en ensamblador 
+//                  c)Programar el printf y scanf
+//Requerimiento 4.-                
+//                  a)Programar el else en ensamblador
+//                  b)Progrmar el for en ensamblador
 
+//Requerimiento 5.- 
+//                  a)Programar el while
+//                  b)Programar el do while
 
 namespace Semantica
 {
@@ -382,6 +389,9 @@ namespace Semantica
         //For -> for(Asignacion Condicion; Incremento) BloqueInstruccones | Intruccion 
         private void For(bool evaluacion)
         {
+            string etiquetaInicioFor = "InicioFor" + cFor;
+            string etiquetaFinFor = "FinFor" + cFor++;
+            asm.WriteLine(etiquetaInicioFor);
             match("for");
             match("(");
             Asignacion(evaluacion);
@@ -414,6 +424,7 @@ namespace Semantica
                     SetPosicion(GuardarPosicion);
                     NextToken();
                 }
+                asm.WriteLine(etiquetaFinFor);
             }  
                 while(validaFor);
   
@@ -495,29 +506,36 @@ namespace Semantica
         }
 
         //Condicion -> Expresion operador relacional Expresion
-        private bool Condicion()
+        private bool Condicion(string etiqueta)
         {
             Expresion();
             string operador = getContenido();
             match(Tipos.OperadorRelacional);
             Expresion();
             float e2 = stack.Pop();
-            asm.WriteLine("POP AX");
-            float e1 = stack.Pop();
             asm.WriteLine("POP BX");
+            float e1 = stack.Pop();
+            asm.WriteLine("POP AX");
+            asm.WriteLine("CMP AX, BX");
             switch (operador)
             {
                 case "==":
+                    asm.WriteLine("JNE " + etiqueta);
                     return e1 == e2;
                 case ">":
+                    asm.WriteLine("JLE " + etiqueta);
                     return e1 > e2;
                 case ">=":
+                    asm.WriteLine("JL " + etiqueta);
                     return e1 >= e2;
                 case "<":
+                    asm.WriteLine("JGE " + etiqueta);
                     return e1 < e2;
                 case "<=":
+                    asm.WriteLine("JG " + etiqueta);
                     return e1 <= e2;
                 default:
+                    asm.WriteLine("JE " + etiqueta);
                     return e1 != e2;
             }
         }
@@ -525,9 +543,10 @@ namespace Semantica
         //If -> if(Condicion) bloque de instrucciones (else bloque de instrucciones)?
         private void If(bool evaluacion)
         {
+            string etiquetaIf = "if " + ++clf;
             match("if");
             match("(");
-            bool validarIf = Condicion();
+            bool validarIf = Condicion(etiquetaIf);
             if (!evaluacion)
             {
                 validarIf = evaluacion;
@@ -541,7 +560,7 @@ namespace Semantica
             {
                 Instruccion(validarIf);
             }
-            if (getContenido() == "else")
+            if (getContenido() == "else") //Requerimiento 4 
             {
                 match("else");
                 if (getContenido() == "{")
@@ -567,6 +586,7 @@ namespace Semantica
                     }
                 }
             }
+        asm.WriteLine(etiquetaIf + ":");
         }
 
         //Printf -> printf(cadena | expresion);

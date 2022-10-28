@@ -29,16 +29,20 @@ namespace Semantica
 {
     public class Lenguaje : Sintaxis
     {
+        int cIf;
+        int cFor;
         List<Variable> variables = new List<Variable>();
         Stack<float> stack = new Stack<float>();
         Variable.TipoDato dominante;
         public Lenguaje()
         {
-
+            cIf = 0;
+            cFor = 0;
         }
         public Lenguaje(string nombre) : base(nombre)
         {
-
+            cIf = 0;
+            cFor = 0;
         }
 
         ~Lenguaje()
@@ -346,7 +350,7 @@ namespace Semantica
         {
             match("while");
             match("(");
-            bool validaWhile = Condicion();
+            bool validaWhile = Condicion("");
             if (!evaluacion)
             {
                 validaWhile = evaluacion;
@@ -377,8 +381,8 @@ namespace Semantica
             } 
             match("while");
             match("(");
-            Condicion();
-            validaDo = Condicion();
+            Condicion("");
+            validaDo = Condicion("");
             if (!evaluacion)
             {
                 validaDo = evaluacion;
@@ -401,7 +405,7 @@ namespace Semantica
             int lineaFor = linea;
             do
             {
-                validaFor = Condicion();
+                validaFor = Condicion("");
                 if (!evaluacion)
                 {
                     validaFor = false;
@@ -543,7 +547,7 @@ namespace Semantica
         //If -> if(Condicion) bloque de instrucciones (else bloque de instrucciones)?
         private void If(bool evaluacion)
         {
-            string etiquetaIf = "if " + ++clf;
+            string etiquetaIf = "if " + ++cIf;
             match("if");
             match("(");
             bool validarIf = Condicion(etiquetaIf);

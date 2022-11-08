@@ -1,5 +1,5 @@
 ;Archivo: prueba.asm
-;Fecha: 07/11/2022 08:18:10 p. m.
+;Fecha: 08/11/2022 07:50:13 a. m.
 #make_COM#
 include emu8086.inc
 ORG 100h

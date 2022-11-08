@@ -505,37 +505,7 @@ namespace Semantica
         }
 
         //Incremento -> Identificador ++ | --
-       /* private void Incremento(bool evaluacion)
-        {
-            string Variable = getContenido();
-            //Requerimiento 2 sino existe la variable levantar excepcion
-            if(!existeVariable(getContenido()))
-            {
-                throw new Error("Error: Variable inexistente '" + getContenido() + "' Encontrada en Linea: " + linea, log);
-            }
-            match(Tipos.Identificador);
-            float incremento = 0;
-            float nuevoValor = getValor(getContenido());
-            Variable.TipoDato tipoDato = getTipo(getContenido());
-            dominante = tipoDato;
-            if(getContenido() == "++")
-            {
-                match("++");
-                if (evaluacion)
-                {
-                    modVariable(Variable,getValor(Variable)+ 1);
-                }
-            }
-            else
-            {
-                match("--");
-                if (evaluacion)
-                {
-                    modVariable(Variable,getValor(Variable)- 1);
-                }
-            }
-        }
-*/
+
 private float Incremento(string variable, bool evaluacion)
         {
             //variable = getContenido();

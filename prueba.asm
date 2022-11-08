@@ -1,8 +1,8 @@
 ;Archivo: prueba.asm
-;Fecha: 21/10/2022 09:57:18 a. m.
+;Fecha: 07/11/2022 08:18:10 p. m.
 #make_COM#
 include emu8086.inc
-ORG 1000h
+ORG 100h
 ;Variables:
 	area DW ? 
 	radio DW ? 
@@ -11,42 +11,67 @@ ORG 1000h
 	a DW ? 
 	d DW ? 
 	altura DW ? 
+	cinco DW ? 
 	x DW ? 
 	y DW ? 
 	i DW ? 
 	j DW ? 
-MOV AX,3
+	k DW ? 
+PRINTN "Introduce la altura de la piramide: "
+CALL SCAN_NUM
+MOV altura, CX
 PUSH AX
-MOV AX,5
-PUSH AX
-POP BX
-POP AX
-ADD AX, BX
-PUSH AX
-MOV AX,8
+MOV AX,2
 PUSH AX
 POP BX
 POP AX
-MUL BX
+CMP AX, BX
+JLE if 1
+InicioFor0:
 PUSH AX
-MOV AX,10
+POP AX
+MOV i, AX
+MOV i, AX
 PUSH AX
-MOV AX,4
+MOV AX,0
+PUSH AX
+POP BX
+POP AX
+CMP AX, BX
+JLE 
+MOV AX,1
+PUSH AX
+MOV AX,0
+PUSH AX
+POP AX
+MOV j, AX
+MOV j, AX
+PUSH AX
+PUSH AX
 PUSH AX
 POP BX
 POP AX
 SUB AX, BX
+PUSH AX
+POP BX
+POP AX
+CMP AX, BX
+JGE 
 PUSH AX
 MOV AX,2
 PUSH AX
 POP BX
 POP AX
 DIV BX
+PUSH DX
+MOV AX,0
+PUSH AX
 POP BX
 POP AX
-SUB AX, BX
-PUSH AX
-POP AX
-MOV y, AX
-RET
-END
+CMP AX, BX
+JNE if 3
+PRINTN ""*""
+JMP else 4
+if 3:
+PRINTN ""-""
+else 4:
